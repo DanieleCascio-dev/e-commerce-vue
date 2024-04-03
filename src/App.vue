@@ -1,11 +1,12 @@
 <script>
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
+import HomePage from "./pages/HomePage.vue";
 export default {
   data() {
     return {};
   },
-  components: { AppHeader, AppFooter },
+  components: { AppHeader, AppFooter, HomePage },
 };
 </script>
 

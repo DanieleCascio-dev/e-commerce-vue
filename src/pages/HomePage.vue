@@ -1,7 +1,17 @@
 <script>
+import axios from "axios";
+import { store } from "../store";
+
 export default {
   data() {
-    return {};
+    return {
+      store,
+    };
+  },
+  created() {
+    axios.get(`${this.store.baseUrl}/api/products`).then((resp) => {
+      console.log(resp);
+    });
   },
 };
 </script>

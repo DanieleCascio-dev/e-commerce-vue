@@ -9,4 +9,4 @@ import VueAxios from "vue-axios";
 //import vue router
 import { router } from "../router";
 
-createApp(App).use(VueAxios, axios, router).mount("#app");
+createApp(App).use(VueAxios, axios).use(router).mount("#app");
