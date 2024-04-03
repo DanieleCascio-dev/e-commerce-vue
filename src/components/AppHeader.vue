@@ -23,7 +23,9 @@ export default {
 
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a href="#" class="nav-link active" aria-current="page">Home</a>
+          <router-link class="nav-link active" :to="{ name: 'home' }"
+            >Home</router-link
+          >
         </li>
         <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
         <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
