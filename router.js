@@ -13,6 +13,11 @@ const router = createRouter({
       name: "product",
       /* component: , */
     },
+    {
+      path: "/checkout",
+      name: "checkout",
+      /* component: , */
+    },
   ],
 });
 export { router };

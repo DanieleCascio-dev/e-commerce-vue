@@ -8,6 +8,4 @@ export default {
 
 <template></template>
 
-<style lang="scss">
-@use "../src/style/general.scss" as *;
-</style>
+<style lang="scss" scoped></style>
