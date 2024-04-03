@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "./src/pages/HomePage.vue";
 import ProductPage from "./src/pages/ProductPage.vue";
+import CheckoutPage from "./src/pages/CheckoutPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -18,7 +19,7 @@ const router = createRouter({
     {
       path: "/checkout",
       name: "checkout",
-      /* component: , */
+      component: CheckoutPage,
     },
   ],
 });
