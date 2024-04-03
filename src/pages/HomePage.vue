@@ -7,15 +7,30 @@ export default {
     return {
       store,
       products: [],
+      curPage: 1,
     };
   },
   created() {
-    // axios call to get all products
-    axios.get(`${this.store.baseUrl}/api/products`).then((resp) => {
-      // console.log(resp.data.results.data);
-      this.products = resp.data.results.data;
-      console.log(this.products);
-    });
+    this.getProducts(1);
+  },
+  methods: {
+    //Function for pagination
+    getProducts(pageNum) {
+      this.curPage = pageNum;
+      const paramsToSend = {
+        page: pageNum,
+      };
+      // axios call to get all products
+      axios
+        .get(`${this.store.baseUrl}/api/products/`, {
+          params: paramsToSend,
+        })
+        .then((resp) => {
+          console.log(resp.data.results.data);
+          this.products = resp.data.results.data;
+          console.log(this.products);
+        });
+    },
   },
 };
 </script>
