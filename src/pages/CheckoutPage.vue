@@ -30,22 +30,20 @@ export default {
     sendData() {
       this.data = {
         client: this.client,
-        data: new Date().toLocaleDateString(),
+        date: new Date().toLocaleDateString(),
         total: this.totPrice,
         productInfo: this.productInfo,
       };
-      const data = this.data;
-      console.log(data);
 
-      axios
-        .post(`${this.store.baseUrl}/api/order`, data)
-        .then((resp) => {
-          console.log(resp.data);
-        })
-        .finally(() => {
+      axios.post(`${this.store.baseUrl}/api/order`, this.data).then((resp) => {
+        if (resp.data.success) {
+          //if payemnt is success reset localStorage and productInfo then show Thank you Page
           this.productInfo = [];
           console.log("Payment successs!");
-        });
+          localStorage.clear();
+          this.$router.push("/thankyou");
+        }
+      });
     },
   },
 };
