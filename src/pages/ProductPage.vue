@@ -18,7 +18,6 @@ export default {
     axios
       .get(`${this.store.baseUrl}/api/products/${this.$route.params.id}`)
       .then((resp) => {
-        
         this.product = resp.data.results;
       })
       .finally(() => {
@@ -75,7 +74,6 @@ export default {
           JSON.parse(localStorage.getItem(key)).price *
           JSON.parse(localStorage.getItem(key)).quantity;
       });
-      
     },
     //clear the localStorage and refresh the cart
     removeAll() {
@@ -115,7 +113,11 @@ export default {
           </div>
 
           <div class="col-4 text-end">
-            <button class="btn btn-primary" @click="addToCart(product)">
+            <button
+              class="btn btn-primary"
+              :disabled="!product.available"
+              @click="addToCart(product)"
+            >
               Add to cart
             </button>
           </div>
