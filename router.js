@@ -3,6 +3,7 @@ import HomePage from "./src/pages/HomePage.vue";
 import ProductPage from "./src/pages/ProductPage.vue";
 import CheckoutPage from "./src/pages/CheckoutPage.vue";
 import ThankyouPage from "./src/pages/ThankyouPage.vue";
+import OrdersPage from "./src/pages/OrdersPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: "/thankyou",
       name: "thankyou",
       component: ThankyouPage,
+    },
+    {
+      path: "/orders",
+      name: "orders",
+      component: OrdersPage,
     },
   ],
 });

@@ -9,6 +9,7 @@ export default {
       products: [],
       curPage: 1,
       totPage: 1,
+      loader: false,
     };
   },
   created() {
@@ -22,6 +23,7 @@ export default {
         page: pageNum,
       };
       // axios call to get all products
+      this.loader = true;
       axios
         .get(`${this.store.baseUrl}/api/products/`, {
           params: paramsToSend,
@@ -31,6 +33,9 @@ export default {
           this.products = resp.data.results.data;
           this.totPage = resp.data.results.last_page;
           console.log(this.products);
+        })
+        .finally(() => {
+          this.loader = false;
         });
     },
   },
@@ -39,7 +44,8 @@ export default {
 
 <template>
   <h1 class="text-center mb-3">Sofa and Sofa!</h1>
-  <div class="container">
+  <h3 class="text-center" v-if="loader">Loading...</h3>
+  <div v-else class="container">
     <!-- Row -->
     <div class="row">
       <div v-for="product in products" class="col-4 mb-2">

@@ -9,15 +9,20 @@ export default {
       product: {},
       storageProducts: [],
       totPrice: 0,
+      loader: false,
     };
   },
   created() {
+    this.loader = true;
     // Call to api when page is created to get product info
     axios
       .get(`${this.store.baseUrl}/api/products/${this.$route.params.id}`)
       .then((resp) => {
         console.log(resp.data.results);
         this.product = resp.data.results;
+      })
+      .finally(() => {
+        this.loader = false;
       });
     // show the content localStorage into the cart
     this.showStorage();
@@ -72,7 +77,8 @@ export default {
 
 <template>
   <h2 class="text-center mb-5">What's inside</h2>
-  <div class="container">
+  <h3 class="text-center" v-if="loader">Loading...</h3>
+  <div v-else class="container">
     <div class="row">
       <div class="col-10">
         <div class="row">

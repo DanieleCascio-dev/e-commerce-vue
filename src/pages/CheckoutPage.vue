@@ -8,14 +8,15 @@ export default {
       totPrice: 0,
       storageProducts: [],
       client: "",
-      productInfo: [],
-      data: {},
+      productInfo: [], // it will contains id and quantity of all products into localStorage
+      data: {}, // data to send with axios post call
     };
   },
   created() {
-    this.showStorage();
+    this.showStorage(); // show the cart when page is created
   },
   methods: {
+    // another function to show cart but also to set values for productInfo
     showStorage() {
       this.storageProducts = [];
       Object.keys(localStorage).forEach((key) => {
@@ -27,6 +28,7 @@ export default {
         });
       });
     },
+    //Prepare and send data to database with api
     sendData() {
       this.data = {
         client: this.client,
