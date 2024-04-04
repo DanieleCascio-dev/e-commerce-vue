@@ -54,7 +54,11 @@ export default {
       <div v-for="product in products" class="col-4 mb-4">
         <!-- Card -->
         <div class="card w-100" style="height: 650px">
-          <img :src="product.image" class="card-img-top" />
+          <img
+            :src="product.image"
+            class="card-img-top"
+            style="height: 350px"
+          />
           <div class="card-body d-flex flex-column justify-content-between">
             <h5 class="card-title">{{ product.title }}</h5>
             <p class="card-text">{{ product.description }}</p>
