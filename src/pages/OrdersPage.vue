@@ -14,9 +14,7 @@ export default {
     axios
       .get(`${this.store.baseUrl}/api/orders`)
       .then((resp) => {
-        console.log(resp);
         this.orders = resp.data.results.data;
-        console.log(this.orders);
       })
       .finally(() => {
         this.loader = false;

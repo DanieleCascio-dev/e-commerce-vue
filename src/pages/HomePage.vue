@@ -29,10 +29,8 @@ export default {
           params: paramsToSend,
         })
         .then((resp) => {
-          console.log(resp.data.results);
           this.products = resp.data.results.data;
           this.totPage = resp.data.results.last_page;
-          console.log(this.products);
         })
         .finally(() => {
           this.loader = false;

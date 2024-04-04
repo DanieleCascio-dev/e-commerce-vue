@@ -18,7 +18,7 @@ export default {
     axios
       .get(`${this.store.baseUrl}/api/products/${this.$route.params.id}`)
       .then((resp) => {
-        console.log(resp.data.results);
+        
         this.product = resp.data.results;
       })
       .finally(() => {
@@ -75,7 +75,7 @@ export default {
           JSON.parse(localStorage.getItem(key)).price *
           JSON.parse(localStorage.getItem(key)).quantity;
       });
-      console.log(this.storageProducts);
+      
     },
     //clear the localStorage and refresh the cart
     removeAll() {

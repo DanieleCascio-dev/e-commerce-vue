@@ -46,7 +46,6 @@ export default {
           if (resp.data.success) {
             //if payemnt is success reset localStorage and productInfo then show Thank you Page
             this.productInfo = [];
-            console.log("Payment successs!");
             localStorage.clear();
             this.$router.push("/thankyou");
           }
