@@ -1,9 +1,15 @@
 <script>
+import axios from "axios";
+import { store } from "../store";
 export default {
   data() {
     return {
+      store,
       totPrice: 0,
       storageProducts: [],
+      client: "",
+      productInfo: [],
+      data: {},
     };
   },
   created() {
@@ -15,8 +21,31 @@ export default {
       Object.keys(localStorage).forEach((key) => {
         this.storageProducts.push(JSON.parse(localStorage.getItem(key)));
         this.totPrice += JSON.parse(localStorage.getItem(key)).price;
+        this.productInfo.push({
+          id: JSON.parse(localStorage.getItem(key)).id,
+          quantity: JSON.parse(localStorage.getItem(key)).quantity,
+        });
       });
-      console.log(this.storageProducts);
+    },
+    sendData() {
+      this.data = {
+        client: this.client,
+        data: new Date().toLocaleDateString(),
+        total: this.totPrice,
+        productInfo: this.productInfo,
+      };
+      const data = this.data;
+      console.log(data);
+
+      axios
+        .post(`${this.store.baseUrl}/api/order`, data)
+        .then((resp) => {
+          console.log(resp.data);
+        })
+        .finally(() => {
+          this.productInfo = [];
+          console.log("Payment successs!");
+        });
     },
   },
 };
@@ -44,6 +73,7 @@ export default {
             type="text"
             class="form-control"
             placeholder="First name"
+            v-model="client"
           />
         </div>
         <div class="col">
@@ -68,7 +98,7 @@ export default {
           <input required type="text" class="form-control" placeholder="City" />
         </div>
       </div>
-      <button type="submit" class="btn btn-success">Buy</button>
+      <button class="btn btn-success" @click.prevent="sendData">Buy</button>
     </form>
   </div>
 </template>
