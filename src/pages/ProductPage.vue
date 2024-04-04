@@ -68,9 +68,12 @@ export default {
     // Show products into the cart and update the total price
     showStorage() {
       this.storageProducts = [];
+      this.totPrice = 0;
       Object.keys(localStorage).forEach((key) => {
         this.storageProducts.push(JSON.parse(localStorage.getItem(key)));
-        this.totPrice += JSON.parse(localStorage.getItem(key)).price;
+        this.totPrice +=
+          JSON.parse(localStorage.getItem(key)).price *
+          JSON.parse(localStorage.getItem(key)).quantity;
       });
       console.log(this.storageProducts);
     },
@@ -78,6 +81,7 @@ export default {
     removeAll() {
       localStorage.clear();
       this.showStorage();
+      this.totPrice = 0;
     },
   },
 };
@@ -126,7 +130,7 @@ export default {
               <p class="m-0"><strong>Product: </strong>{{ product.title }}</p>
               <p><strong>Quantity: </strong>{{ product.quantity }}</p>
             </div>
-            <p><strong>Tot: </strong>{{ totPrice }}€</p>
+            <p><strong>Tot: </strong>{{ totPrice.toFixed(2) }}€</p>
             <button class="btn btn-danger mb-2" @click="removeAll">
               Remove All
             </button>
