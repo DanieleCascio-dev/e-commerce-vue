@@ -22,7 +22,9 @@ export default {
       this.storageProducts = [];
       Object.keys(localStorage).forEach((key) => {
         this.storageProducts.push(JSON.parse(localStorage.getItem(key)));
-        this.totPrice += JSON.parse(localStorage.getItem(key)).price;
+        this.totPrice +=
+          JSON.parse(localStorage.getItem(key)).price *
+          JSON.parse(localStorage.getItem(key)).quantity;
         this.productInfo.push({
           id: JSON.parse(localStorage.getItem(key)).id,
           quantity: JSON.parse(localStorage.getItem(key)).quantity,
