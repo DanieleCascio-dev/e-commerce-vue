@@ -43,23 +43,21 @@ export default {
 </script>
 
 <template>
-  <h1 class="text-center mb-3">
-    You went So Far! <br />
-    Take a Sofa and Relax!
+  <h1 class="text-center _mb">
+    You went So Far, <br />
+    take a So'Fa and relax!
   </h1>
-  <h3 class="text-center" v-if="loader">Loading...</h3>
+  <h3 class="text-center mb-5" v-if="loader">Loading...</h3>
   <div v-else class="container">
     <!-- Row -->
     <div class="row">
-      <div v-for="product in products" class="col-4 mb-2">
+      <div v-for="product in products" class="col-4 mb-4">
         <!-- Card -->
-        <div class="card w-100" style="height: 580px">
+        <div class="card w-100" style="height: 650px">
           <img :src="product.image" class="card-img-top" />
-          <div class="card-body">
+          <div class="card-body d-flex flex-column justify-content-between">
             <h5 class="card-title">{{ product.title }}</h5>
-            <p class="card-text">
-              {{ product.description.slice(0, 100) }}
-            </p>
+            <p class="card-text">{{ product.description }}</p>
             <router-link :to="{ name: 'product', params: { id: product.id } }">
               <button class="btn btn-primary">See details</button>
             </router-link>
@@ -112,4 +110,8 @@ export default {
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+._mb {
+  margin-bottom: 50px;
+}
+</style>
