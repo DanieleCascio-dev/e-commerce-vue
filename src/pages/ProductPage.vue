@@ -30,10 +30,12 @@ export default {
   methods: {
     //Cart methods
     addToCart(product) {
+      //Check if this product already exist into the localStorage
       if (localStorage.getItem(product.title)) {
         //set variable for store qauntity if the product is already into local storage
         let quantity = JSON.parse(localStorage.getItem(product.title)).quantity;
         localStorage.setItem(
+          // create a new object but i increase the quantity
           product.title,
           JSON.stringify({
             id: product.id,
@@ -46,6 +48,7 @@ export default {
           })
         );
       } else {
+        // if it dosen't exists into localStorage i create a new object
         localStorage.setItem(
           product.title,
           JSON.stringify({
@@ -59,10 +62,10 @@ export default {
           })
         );
       }
-      console.log(localStorage);
+      // refresh the cart using ShowStorage function
       this.showStorage();
     },
-    /* Show products into the cart */
+    // Show products into the cart and update the total price
     showStorage() {
       this.storageProducts = [];
       Object.keys(localStorage).forEach((key) => {
@@ -70,6 +73,11 @@ export default {
         this.totPrice += JSON.parse(localStorage.getItem(key)).price;
       });
       console.log(this.storageProducts);
+    },
+    //clear the localStorage and refresh the cart
+    removeAll() {
+      localStorage.clear();
+      this.showStorage();
     },
   },
 };
@@ -113,7 +121,7 @@ export default {
       </div>
       <!-- CART -->
       <div class="col-2">
-        <div class="cart">
+        <div class="cart border p-2">
           <h5>YOUR CART</h5>
           <div v-if="storageProducts.length > 0">
             <div v-for="product in storageProducts">
@@ -121,12 +129,16 @@ export default {
               <p><strong>Quantity: </strong>{{ product.quantity }}</p>
             </div>
             <p><strong>Tot: </strong>{{ totPrice }}€</p>
+            <button class="btn btn-danger mb-2" @click="removeAll">
+              Remove All
+            </button>
             <router-link :to="{ name: 'checkout' }"
               ><button class="btn btn-success">
                 Go to checkout
               </button></router-link
             >
           </div>
+          <h6 v-else>Add some So'Fa!</h6>
         </div>
       </div>
       <!-- END CART -->
