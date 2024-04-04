@@ -10,6 +10,7 @@ export default {
       client: "",
       productInfo: [], // it will contains id and quantity of all products into localStorage
       data: {}, // data to send with axios post call
+      loader: false,
     };
   },
   created() {
@@ -36,16 +37,21 @@ export default {
         total: this.totPrice,
         productInfo: this.productInfo,
       };
-
-      axios.post(`${this.store.baseUrl}/api/order`, this.data).then((resp) => {
-        if (resp.data.success) {
-          //if payemnt is success reset localStorage and productInfo then show Thank you Page
-          this.productInfo = [];
-          console.log("Payment successs!");
-          localStorage.clear();
-          this.$router.push("/thankyou");
-        }
-      });
+      this.loader = true;
+      axios
+        .post(`${this.store.baseUrl}/api/order`, this.data)
+        .then((resp) => {
+          if (resp.data.success) {
+            //if payemnt is success reset localStorage and productInfo then show Thank you Page
+            this.productInfo = [];
+            console.log("Payment successs!");
+            localStorage.clear();
+            this.$router.push("/thankyou");
+          }
+        })
+        .finally(() => {
+          this.loader = false;
+        });
     },
   },
 };
@@ -100,6 +106,7 @@ export default {
       </div>
       <button class="btn btn-success" @click.prevent="sendData">Buy</button>
     </form>
+    <h3 v-if="loader" class="text-center">Checking for your payment...</h3>
   </div>
 </template>
 

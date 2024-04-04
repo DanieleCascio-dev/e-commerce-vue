@@ -6,21 +6,29 @@ export default {
     return {
       store,
       orders: [],
+      loader: false,
     };
   },
   created() {
-    axios.get(`${this.store.baseUrl}/api/orders`).then((resp) => {
-      console.log(resp);
-      this.orders = resp.data.results.data;
-      console.log(this.orders);
-    });
+    this.loader = true;
+    axios
+      .get(`${this.store.baseUrl}/api/orders`)
+      .then((resp) => {
+        console.log(resp);
+        this.orders = resp.data.results.data;
+        console.log(this.orders);
+      })
+      .finally(() => {
+        this.loader = false;
+      });
   },
 };
 </script>
 
 <template>
-  <div>Orders page!</div>
-  <div class="container">
+  <h2 class="text-center">Orders Page!</h2>
+  <h3 class="text-center" v-if="loader">Loading...</h3>
+  <div v-else class="container">
     <table class="table">
       <thead class="thead-dark">
         <tr>
@@ -38,12 +46,14 @@ export default {
           <td>{{ order.date }}</td>
           <td>{{ order.total }} €</td>
           <td>
-            <span
-              v-for="product in order.products"
-              v-if="order.products.length > 0"
-              >{{ product.title }}</span
-            >
-            <span v-else>No products</span>
+            <ul>
+              <li
+                v-for="product in order.products"
+                v-if="order.products.length > 0"
+              >
+                {{ product.title }}
+              </li>
+            </ul>
           </td>
         </tr>
       </tbody>

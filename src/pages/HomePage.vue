@@ -43,14 +43,17 @@ export default {
 </script>
 
 <template>
-  <h1 class="text-center mb-3">Sofa and Sofa!</h1>
+  <h1 class="text-center mb-3">
+    You went So Far! <br />
+    Take a Sofa and Relax!
+  </h1>
   <h3 class="text-center" v-if="loader">Loading...</h3>
   <div v-else class="container">
     <!-- Row -->
     <div class="row">
       <div v-for="product in products" class="col-4 mb-2">
         <!-- Card -->
-        <div class="card w-100" style="min-height: 478px">
+        <div class="card w-100" style="height: 580px">
           <img :src="product.image" class="card-img-top" />
           <div class="card-body">
             <h5 class="card-title">{{ product.title }}</h5>
